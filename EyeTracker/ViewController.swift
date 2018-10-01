@@ -17,6 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private let label = UILabel()
 
     private let leftEyeNode = SCNNode(geometry: SCNSphere(radius: 0.007))
+    private let leftEyeEndNode = SCNNode(geometry: SCNSphere(radius: 0.007))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         leftEyeNode.renderingOrder = 100
         leftEyeNode.geometry?.firstMaterial?.readsFromDepthBuffer = false
         leftEyeNode.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+
+        sceneView.scene.rootNode.addChildNode(leftEyeEndNode)
+        leftEyeEndNode.opacity = 0.7
+        leftEyeEndNode.renderingOrder = 100
+        leftEyeEndNode.geometry?.firstMaterial?.readsFromDepthBuffer = false
+        leftEyeEndNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
 
         pointView.backgroundColor = .red
         pointView.layer.cornerRadius = 5.0
@@ -92,8 +99,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             return
         }
 
-        leftEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
-
         guard let cameraTransform = sceneView.pointOfView?.transform else { return }
         let cameraNode = SCNNode()
         cameraNode.transform = cameraTransform
@@ -108,5 +113,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         y: \(latPoint.y)
         z: \(latPoint.z)
         """
+
+        leftEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
+
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = 1.0 - latPoint.z - 0.14
+        leftEyeEndNode.simdTransform = simd_mul(leftEyeNode.simdTransform, translation)
     }
 }
