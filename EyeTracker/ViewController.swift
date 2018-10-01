@@ -15,9 +15,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     private let pointView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
     private let label = UILabel()
-    
+
+    private let leftEyeNode = SCNNode(geometry: SCNSphere(radius: 0.007))
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        sceneView.scene.rootNode.addChildNode(leftEyeNode)
+        leftEyeNode.opacity = 0.7
+        leftEyeNode.renderingOrder = 100
+        leftEyeNode.geometry?.firstMaterial?.readsFromDepthBuffer = false
+        leftEyeNode.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
 
         pointView.backgroundColor = .red
         pointView.layer.cornerRadius = 5.0
@@ -35,8 +43,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         sceneView.delegate = self
         sceneView.showsStatistics = true
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        sceneView.scene = scene
+//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,12 +64,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     // MARK: - ARSCNViewDelegate
 
     // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-        node.geometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 5)
-
-        return node
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+//        let node = SCNNode()
+//
+//        return node
+//    }
 
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -84,6 +91,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first else {
             return
         }
+
+        leftEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
 
         guard let cameraTransform = sceneView.pointOfView?.transform else { return }
         let cameraNode = SCNNode()
