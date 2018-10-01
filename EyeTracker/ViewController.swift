@@ -9,54 +9,60 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+
+    private let pointView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    private let label = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
+
+        pointView.backgroundColor = .red
+        pointView.layer.cornerRadius = 5.0
+        view.addSubview(pointView)
+        pointView.center = view.center
+
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        label.textColor = .white
+        label.numberOfLines = 0
+
+        sceneView.session.delegate = self
+
         sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
-        
-        // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
         sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
 
-        // Run the view's session
+        let configuration = ARFaceTrackingConfiguration()
+
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
+
         sceneView.session.pause()
     }
 
     // MARK: - ARSCNViewDelegate
-    
-/*
+
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
-     
+        node.geometry = SCNBox(width: 10, height: 10, length: 10, chamferRadius: 5)
+
         return node
     }
-*/
-    
+
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -70,5 +76,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        print(#function)
+
+        guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first else {
+            return
+        }
+
+        guard let cameraTransform = sceneView.pointOfView?.transform else { return }
+        let cameraNode = SCNNode()
+        cameraNode.transform = cameraTransform
+        let faceNode = SCNNode()
+        faceNode.transform = SCNMatrix4(faceAnchor.transform)
+
+        let latPoint = faceNode.convertPosition(SCNVector3(faceAnchor.lookAtPoint), to: cameraNode)
+        print("latPoint", latPoint)
+
+        label.text = """
+        x: \(latPoint.x)
+        y: \(latPoint.y)
+        z: \(latPoint.z)
+        """
     }
 }
