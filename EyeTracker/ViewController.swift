@@ -16,11 +16,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     private let pointView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
     private let label = UILabel()
 
+    private let rightEyeNode =  SCNNode(geometry: SCNSphere(radius: 0.007))
+    private let rightEyeEndNode = SCNNode(geometry: SCNSphere(radius: 0.007))
     private let leftEyeNode = SCNNode(geometry: SCNSphere(radius: 0.007))
     private let leftEyeEndNode = SCNNode(geometry: SCNSphere(radius: 0.007))
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        sceneView.scene.rootNode.addChildNode(rightEyeNode)
+        rightEyeNode.opacity = 0.7
+        rightEyeNode.renderingOrder = 100
+        rightEyeNode.geometry?.firstMaterial?.readsFromDepthBuffer = false
+        rightEyeNode.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+
+        sceneView.scene.rootNode.addChildNode(rightEyeEndNode)
+        rightEyeEndNode.opacity = 0.7
+        rightEyeEndNode.renderingOrder = 100
+        rightEyeEndNode.geometry?.firstMaterial?.readsFromDepthBuffer = false
+        rightEyeEndNode.geometry?.firstMaterial?.diffuse.contents = UIColor.gray
 
         sceneView.scene.rootNode.addChildNode(leftEyeNode)
         leftEyeNode.opacity = 0.7
@@ -50,8 +64,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         sceneView.delegate = self
         sceneView.showsStatistics = true
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-//        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,31 +105,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        print(#function)
-
         guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first else {
             return
         }
 
-        guard let cameraTransform = sceneView.pointOfView?.transform else { return }
-        let cameraNode = SCNNode()
-        cameraNode.transform = cameraTransform
-        let faceNode = SCNNode()
-        faceNode.transform = SCNMatrix4(faceAnchor.transform)
-
-        let latPoint = faceNode.convertPosition(SCNVector3(faceAnchor.lookAtPoint), to: cameraNode)
-        print("latPoint", latPoint)
-
-        label.text = """
-        x: \(latPoint.x)
-        y: \(latPoint.y)
-        z: \(latPoint.z)
-        """
-
+        rightEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.rightEyeTransform)
         leftEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
 
         var translation = matrix_identity_float4x4
-        translation.columns.3.z = 1.0 - latPoint.z - 0.14
+        translation.columns.3.z = 0.2
+        rightEyeEndNode.simdTransform =  simd_mul(rightEyeNode.simdTransform, translation)
         leftEyeEndNode.simdTransform = simd_mul(leftEyeNode.simdTransform, translation)
+
+        let eyesMidPoint = (rightEyeEndNode.simdPosition + leftEyeEndNode.simdPosition) / 2
+
+        let viewport = UIScreen.main.bounds.size
+        let screenPos = session.currentFrame!.camera.projectPoint(eyesMidPoint, orientation: .portrait, viewportSize: viewport)
+
+        print(screenPos)
+        pointView.center = screenPos
+
+        label.text = """
+        x: \(screenPos.x)
+        y: \(screenPos.y)
+        """
     }
 }
