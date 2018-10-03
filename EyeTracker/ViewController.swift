@@ -112,14 +112,25 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         rightEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.rightEyeTransform)
         leftEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
 
-        let eyesCenter = (rightEyeNode.simdPosition + leftEyeNode.simdPosition) / 2
         let cameraNode = SCNNode()
         cameraNode.simdTransform = session.currentFrame!.camera.transform
-        let cameraToEyesCenterDistance = (eyesCenter - cameraNode.simdPosition).length
+
+        let p1 = cameraNode.simdWorldPosition
+        cameraNode.localTranslate(by: SCNVector3(1.0, 0.0, 0.0))
+        let p2 = cameraNode.simdWorldPosition
+        cameraNode.localTranslate(by: SCNVector3(0.0, 1.0, 0.0))
+        let p3 = cameraNode.simdWorldPosition
+
+        let plane = Plane(p1: p1, p2: p2, p3: p3)
+        let rightRay = Ray(origin: rightEyeNode.simdWorldPosition,
+                           direction: -rightEyeNode.simdWorldFront)
+        let leftRay = Ray(origin: leftEyeNode.simdWorldPosition,
+                          direction: -leftEyeNode.simdWorldFront)
 
         var translation = matrix_identity_float4x4
-        translation.columns.3.z = cameraToEyesCenterDistance - 0.1
+        translation.columns.3.z = rightRay.dist(with: plane) - 0.05
         rightEyeEndNode.simdTransform = simd_mul(rightEyeNode.simdTransform, translation)
+        translation.columns.3.z = leftRay.dist(with: plane) - 0.05
         leftEyeEndNode.simdTransform = simd_mul(leftEyeNode.simdTransform, translation)
 
         let eyesMidPoint = (rightEyeEndNode.simdPosition + leftEyeEndNode.simdPosition) / 2

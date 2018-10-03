@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370175CA21650F0700F4C84F /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370175C921650F0700F4C84F /* Ray.swift */; };
+		370175CC21650F7400F4C84F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370175CB21650F7400F4C84F /* Plane.swift */; };
 		83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1DC21621E5C005BFBED /* AppDelegate.swift */; };
 		83BCF1DF21621E5C005BFBED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1DE21621E5C005BFBED /* art.scnassets */; };
 		83BCF1E121621E5C005BFBED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1E021621E5C005BFBED /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370175C921650F0700F4C84F /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
+		370175CB21650F7400F4C84F /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		83BCF1D921621E5C005BFBED /* EyeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83BCF1DC21621E5C005BFBED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83BCF1DE21621E5C005BFBED /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				83BCF1DC21621E5C005BFBED /* AppDelegate.swift */,
 				83BCF1DE21621E5C005BFBED /* art.scnassets */,
 				83BCF1E021621E5C005BFBED /* ViewController.swift */,
+				370175C921650F0700F4C84F /* Ray.swift */,
+				370175CB21650F7400F4C84F /* Plane.swift */,
 				83BCF1E221621E5C005BFBED /* Main.storyboard */,
 				83BCF1E521621E5E005BFBED /* Assets.xcassets */,
 				83BCF1E721621E5E005BFBED /* LaunchScreen.storyboard */,
@@ -140,6 +146,8 @@
 			files = (
 				83BCF1E121621E5C005BFBED /* ViewController.swift in Sources */,
 				83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */,
+				370175CC21650F7400F4C84F /* Plane.swift in Sources */,
+				370175CA21650F0700F4C84F /* Ray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
