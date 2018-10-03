@@ -112,9 +112,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         rightEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.rightEyeTransform)
         leftEyeNode.simdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
 
+        let eyesCenter = (rightEyeNode.simdPosition + leftEyeNode.simdPosition) / 2
+        let cameraNode = SCNNode()
+        cameraNode.simdTransform = session.currentFrame!.camera.transform
+        let cameraToEyesCenterDistance = (eyesCenter - cameraNode.simdPosition).length
+
         var translation = matrix_identity_float4x4
-        translation.columns.3.z = 0.2
-        rightEyeEndNode.simdTransform =  simd_mul(rightEyeNode.simdTransform, translation)
+        translation.columns.3.z = cameraToEyesCenterDistance - 0.1
+        rightEyeEndNode.simdTransform = simd_mul(rightEyeNode.simdTransform, translation)
         leftEyeEndNode.simdTransform = simd_mul(leftEyeNode.simdTransform, translation)
 
         let eyesMidPoint = (rightEyeEndNode.simdPosition + leftEyeEndNode.simdPosition) / 2
@@ -129,5 +134,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         x: \(screenPos.x)
         y: \(screenPos.y)
         """
+    }
+}
+
+extension simd_float3 {
+    var length: Float {
+        return sqrt(x * x + y * y + z * z)
     }
 }
