@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		370175CA21650F0700F4C84F /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370175C921650F0700F4C84F /* Ray.swift */; };
 		370175CC21650F7400F4C84F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370175CB21650F7400F4C84F /* Plane.swift */; };
+		377DEDE52167A765002E85A0 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DEDE42167A765002E85A0 /* ContentCell.swift */; };
 		3799A8042166DE26008D80E1 /* EyeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A8032166DE26008D80E1 /* EyeTracker.swift */; };
 		3799A8062166DE96008D80E1 /* simd+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A8052166DE96008D80E1 /* simd+Extensions.swift */; };
 		83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1DC21621E5C005BFBED /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 		370175C921650F0700F4C84F /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		370175CB21650F7400F4C84F /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		377DEDE221679A2E002E85A0 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		377DEDE42167A765002E85A0 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		3799A8032166DE26008D80E1 /* EyeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeTracker.swift; sourceTree = "<group>"; };
 		3799A8052166DE96008D80E1 /* simd+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+Extensions.swift"; sourceTree = "<group>"; };
 		83BCF1D921621E5C005BFBED /* EyeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,7 @@
 			children = (
 				83BCF1DC21621E5C005BFBED /* AppDelegate.swift */,
 				83BCF1E021621E5C005BFBED /* ViewController.swift */,
+				377DEDE42167A765002E85A0 /* ContentCell.swift */,
 				370175C921650F0700F4C84F /* Ray.swift */,
 				3799A8032166DE26008D80E1 /* EyeTracker.swift */,
 				3799A8052166DE96008D80E1 /* simd+Extensions.swift */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3799A8042166DE26008D80E1 /* EyeTracker.swift in Sources */,
+				377DEDE52167A765002E85A0 /* ContentCell.swift in Sources */,
 				83BCF1E121621E5C005BFBED /* ViewController.swift in Sources */,
 				3799A8062166DE96008D80E1 /* simd+Extensions.swift in Sources */,
 				83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */,

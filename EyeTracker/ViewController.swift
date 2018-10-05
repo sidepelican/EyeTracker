@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController, EyeTrackerDelegate {
+class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
     private let pointView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
     private let imageView = UIImageView()
     private let eyeTracker = EyeTracker()
@@ -17,31 +18,39 @@ class ViewController: UIViewController, EyeTrackerDelegate {
 
         eyeTracker.delegate = self
 
+        tableView.rowHeight = 180
+
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageView.alpha = 0.7
+        imageView.alpha = 0.3
+        imageView.isHidden = true
 
-        view.addSubview(pointView)
+        UIApplication.shared.keyWindow?.addSubview(pointView)
         pointView.backgroundColor = .red
         pointView.layer.cornerRadius = 5.0
         pointView.center = view.center
+        pointView.layer.zPosition = 333
+
+        eyeTracker.start()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        eyeTracker.start()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        eyeTracker.pause()
+    @IBAction func navigationBarItemSwitchValueChanged(_ sender: UISwitch) {
+        imageView.isHidden = !sender.isOn
     }
+
+    // MARK: - EyeTrackerDelegate
 
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState) {
         switch state {
@@ -55,7 +64,7 @@ class ViewController: UIViewController, EyeTrackerDelegate {
             break
         }
 
-        if let currentFrame = eyeTracker.currentFrame {
+        if !imageView.isHidden, let currentFrame = eyeTracker.currentFrame {
             let ciImage = CIImage(cvImageBuffer: currentFrame.capturedImage).oriented(.right)
             let context = CIContext()
             let rect = CGRect(x: 0,
@@ -70,5 +79,17 @@ class ViewController: UIViewController, EyeTrackerDelegate {
                 imageView.contentMode = .scaleAspectFill
             }
         }
+    }
+
+    // MARK: - UITableViewDataSource
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentCell
+        cell.titleLabel.text = "Content \(indexPath.item + 1)"
+        return cell
     }
 }
