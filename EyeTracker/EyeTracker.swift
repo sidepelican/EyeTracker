@@ -24,7 +24,7 @@ class EyeTracker: NSObject, ARSessionDelegate {
         return session.currentFrame
     }
     weak var delegate: EyeTrackerDelegate?
-    var screenDisplacement: Float = 0.05
+    var screenDisplacement: Float = 0.04
 
     func start() {
         displayLink = CADisplayLink(target: self, selector: #selector(sync(with:)))
