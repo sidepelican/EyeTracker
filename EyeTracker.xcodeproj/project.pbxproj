@@ -12,7 +12,6 @@
 		3799A8042166DE26008D80E1 /* EyeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A8032166DE26008D80E1 /* EyeTracker.swift */; };
 		3799A8062166DE96008D80E1 /* simd+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A8052166DE96008D80E1 /* simd+Extensions.swift */; };
 		83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1DC21621E5C005BFBED /* AppDelegate.swift */; };
-		83BCF1DF21621E5C005BFBED /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1DE21621E5C005BFBED /* art.scnassets */; };
 		83BCF1E121621E5C005BFBED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1E021621E5C005BFBED /* ViewController.swift */; };
 		83BCF1E421621E5C005BFBED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1E221621E5C005BFBED /* Main.storyboard */; };
 		83BCF1E621621E5E005BFBED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1E521621E5E005BFBED /* Assets.xcassets */; };
@@ -22,11 +21,11 @@
 /* Begin PBXFileReference section */
 		370175C921650F0700F4C84F /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		370175CB21650F7400F4C84F /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
+		377DEDE221679A2E002E85A0 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		3799A8032166DE26008D80E1 /* EyeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeTracker.swift; sourceTree = "<group>"; };
 		3799A8052166DE96008D80E1 /* simd+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+Extensions.swift"; sourceTree = "<group>"; };
 		83BCF1D921621E5C005BFBED /* EyeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83BCF1DC21621E5C005BFBED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		83BCF1DE21621E5C005BFBED /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		83BCF1E021621E5C005BFBED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		83BCF1E321621E5C005BFBED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		83BCF1E521621E5E005BFBED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,11 +44,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		377DEDE121679A2E002E85A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				377DEDE221679A2E002E85A0 /* ARKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83BCF1D021621E5C005BFBED = {
 			isa = PBXGroup;
 			children = (
 				83BCF1DB21621E5C005BFBED /* EyeTracker */,
 				83BCF1DA21621E5C005BFBED /* Products */,
+				377DEDE121679A2E002E85A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				83BCF1DC21621E5C005BFBED /* AppDelegate.swift */,
-				83BCF1DE21621E5C005BFBED /* art.scnassets */,
 				83BCF1E021621E5C005BFBED /* ViewController.swift */,
 				370175C921650F0700F4C84F /* Ray.swift */,
 				3799A8032166DE26008D80E1 /* EyeTracker.swift */,
@@ -136,7 +143,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83BCF1DF21621E5C005BFBED /* art.scnassets in Resources */,
 				83BCF1E921621E5E005BFBED /* LaunchScreen.storyboard in Resources */,
 				83BCF1E621621E5E005BFBED /* Assets.xcassets in Resources */,
 				83BCF1E421621E5C005BFBED /* Main.storyboard in Resources */,
@@ -302,6 +308,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = R3M694BK62;
 				INFOPLIST_FILE = EyeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

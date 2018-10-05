@@ -4,46 +4,55 @@ protocol EyeTrackerDelegate: class {
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState)
 }
 
-public class EyeTracker: NSObject, ARSessionDelegate {
+class EyeTracker: NSObject, ARSessionDelegate {
     enum TrackingState {
-        case `in`(CGPoint)
-        case out
+        case screenIn(CGPoint)
+        case screenOut
         case notTracked
         case pausing
     }
 
-    private let session = ARSession()
+    private var session: ARSession!
+    private var displayLink: CADisplayLink?
+    private(set) var state: TrackingState = .pausing
+
     var currentFrame: ARFrame? {
         return session.currentFrame
     }
-
-    private(set) var state: TrackingState = .pausing {
-        didSet {
-            delegate?.eyeTracker(self, didUpdateTrackingState: state)
-        }
-    }
-
     weak var delegate: EyeTrackerDelegate?
+    var screenDisplacement: Float = 0.05
 
     func start() {
+        displayLink = CADisplayLink(target: self, selector: #selector(sync(with:)))
+        displayLink?.add(to: .main, forMode: .common)
+
+        session = ARSession()
+        session.delegate = self
         let configuration = ARFaceTrackingConfiguration()
         session.run(configuration)
     }
 
     func pause() {
         session.pause()
+        displayLink?.invalidate()
         state = .pausing
     }
 
-    private func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first else {
-            return
+    @objc func sync(with display: CADisplayLink) {
+        delegate?.eyeTracker(self, didUpdateTrackingState: state)
+        state = .notTracked
+    }
+
+    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first,
+            let camera = session.currentFrame?.camera else {
+                return
         }
 
         let rightEyeSimdTransform = simd_mul(faceAnchor.transform, faceAnchor.rightEyeTransform)
         let leftEyeSimdTransform = simd_mul(faceAnchor.transform, faceAnchor.leftEyeTransform)
 
-        var cameraTransform = session.currentFrame!.camera.transform
+        var cameraTransform = camera.transform
 
         var translation = matrix_identity_float4x4
         let p1 = cameraTransform.position
@@ -62,16 +71,16 @@ public class EyeTracker: NSObject, ARSessionDelegate {
                           direction: -leftEyeSimdTransform.frontVector)
 
         translation = matrix_identity_float4x4
-        translation.columns.3.z = rightRay.dist(with: plane) - 0.05
+        translation.columns.3.z = rightRay.dist(with: plane) - screenDisplacement
         let rightEyeEndSimdTransform = simd_mul(rightEyeSimdTransform, translation)
-        translation.columns.3.z = leftRay.dist(with: plane) - 0.05
+        translation.columns.3.z = leftRay.dist(with: plane) - screenDisplacement
         let leftEyeEndSimdTransform = simd_mul(leftEyeSimdTransform, translation)
 
         let eyesMidPoint = (rightEyeEndSimdTransform.position + leftEyeEndSimdTransform.position) / 2
 
         let viewport = UIScreen.main.bounds.size
-        let screenPos = session.currentFrame!.camera.projectPoint(eyesMidPoint, orientation: .portrait, viewportSize: viewport)
+        let screenPos = camera.projectPoint(eyesMidPoint, orientation: .portrait, viewportSize: viewport)
 
-        state = .in(screenPos)
+        state = .screenIn(screenPos)
     }
 }
