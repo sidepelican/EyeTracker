@@ -7,9 +7,13 @@ protocol EyeTrackerDelegate: class {
 class EyeTracker: NSObject, ARSessionDelegate {
     enum TrackingState {
         case screenIn(CGPoint)
-        case screenOut
+        case screenOut(ScreenEdge)
         case notTracked
         case pausing
+    }
+
+    enum ScreenEdge: CaseIterable {
+        case top, left, right, bottom
     }
 
     private var session: ARSession!
@@ -81,6 +85,21 @@ class EyeTracker: NSObject, ARSessionDelegate {
         let viewport = UIScreen.main.bounds.size
         let screenPos = camera.projectPoint(eyesMidPoint, orientation: .portrait, viewportSize: viewport)
 
-        state = .screenIn(screenPos)
+        if UIScreen.main.bounds.contains(screenPos) {
+            state = .screenIn(screenPos)
+        } else {
+            switch (screenPos.x, screenPos.y) {
+            case (_, ...0):
+                state = .screenOut(.top)
+            case (_, viewport.height...):
+                state = .screenOut(.bottom)
+            case (...0, _):
+                state = .screenOut(.left)
+            case (viewport.width..., _):
+                state = .screenOut(.right)
+            default:
+                fatalError("not come here")
+            }
+        }
     }
 }

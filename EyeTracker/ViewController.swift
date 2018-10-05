@@ -12,6 +12,7 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
     private let pointView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
     private let imageView = UIImageView()
     private let eyeTracker = EyeTracker()
+    private var edgeViews: [EyeTracker.ScreenEdge: CAGradientLayer] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,19 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         imageView.alpha = 0.3
         imageView.isHidden = true
 
-        UIApplication.shared.keyWindow?.addSubview(pointView)
+        let baseRect = UIScreen.main.bounds
+        let edgeLayerWidth: CGFloat = 32.0
+        EyeTracker.ScreenEdge.allCases.forEach { edge in
+            let layer = CAGradientLayer()
+            layer.colors = [UIColor.green.withAlphaComponent(0.4).cgColor, UIColor(white: 1.0, alpha: 0.0).cgColor]
+            (layer.frame, _) = baseRect.divided(atDistance: edgeLayerWidth, from: edge.rectEdge)
+            (layer.startPoint, layer.endPoint) = edge.direction
+            navigationController?.view.layer.addSublayer(layer)
+            layer.isHidden = true
+            edgeViews[edge] = layer
+        }
+
+        navigationController?.view.addSubview(pointView)
         pointView.backgroundColor = .red
         pointView.layer.cornerRadius = 5.0
         pointView.center = view.center
@@ -50,18 +63,36 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         imageView.isHidden = !sender.isOn
     }
 
+    private func scrollTableView(_ y: CGFloat) {
+        tableView.flashScrollIndicators()
+        var nextContentOffset = CGPoint(x: tableView.contentOffset.x, y: tableView.contentOffset.y + y)
+        nextContentOffset.y = min(max(nextContentOffset.y, 0), tableView.contentSize.height - tableView.bounds.height)
+        tableView.setContentOffset(nextContentOffset, animated: false)
+    }
+
     // MARK: - EyeTrackerDelegate
 
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState) {
+        edgeViews.forEach { $1.isHidden = true }
         switch state {
         case .screenIn(let screenPos):
+            pointView.isHidden = false
             pointView.center = screenPos
-        case .screenOut:
-            break
+        case .screenOut(let edge):
+            pointView.isHidden = true
+            edgeViews[edge]?.isHidden = false
+            switch edge {
+            case .top:
+                scrollTableView(-6)
+            case .bottom:
+                scrollTableView(6)
+            default:
+                break
+            }
         case .notTracked:
-            break
+            pointView.isHidden = true
         case .pausing:
-            break
+            pointView.isHidden = true
         }
 
         if !imageView.isHidden, let currentFrame = eyeTracker.currentFrame {
@@ -91,5 +122,33 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContentCell
         cell.titleLabel.text = "Content \(indexPath.item + 1)"
         return cell
+    }
+}
+
+extension EyeTracker.ScreenEdge {
+    var rectEdge: CGRectEdge {
+        switch self {
+        case .top:
+            return .minYEdge
+        case .left:
+            return .minXEdge
+        case .right:
+            return .maxXEdge
+        case .bottom:
+            return .maxYEdge
+        }
+    }
+
+    var direction: (CGPoint, CGPoint) {
+        switch self {
+        case .top:
+            return (CGPoint(x: 0.5, y: 0.0), CGPoint(x: 0.5, y: 1.0))
+        case .left:
+            return (CGPoint(x: 0.0, y: 0.5), CGPoint(x: 1.0, y: 0.5))
+        case .right:
+            return (CGPoint(x: 1.0, y: 0.5), CGPoint(x: 0.0, y: 0.5))
+        case .bottom:
+            return (CGPoint(x: 0.5, y: 1.0), CGPoint(x: 0.5, y: 0.0))
+        }
     }
 }
