@@ -13,6 +13,7 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
     private let imageView = UIImageView()
     private let eyeTracker = EyeTracker()
     private var edgeViews: [EyeTracker.ScreenEdge: CAGradientLayer] = [:]
+    private var pauseEyeGestureHittest = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,14 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+
+        pauseEyeGestureHittest = true
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        pauseEyeGestureHittest = false
     }
 
     @IBAction func navigationBarItemSwitchValueChanged(_ sender: UISwitch) {
@@ -69,9 +78,12 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
             currentHighlightedCell?.isHighlighted = true
         }
     }
+
     private func hitTestCells(screenPosition: CGPoint) {
+        if pauseEyeGestureHittest { return }
+
         if navigationController?.visibleViewController != self {
-            if CGRect(x: 0, y: 38, width: 85, height: 56).contains(screenPosition) {
+            if CGRect(x: 0, y: 30, width: 100, height: 70).contains(screenPosition) {
                 pointView.progress += 0.03
                 if pointView.progress >= 1.0 {
                     navigationController?.popViewController(animated: true)
