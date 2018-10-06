@@ -17,7 +17,6 @@ class EyeTracker: NSObject, ARSessionDelegate {
     }
 
     private var session: ARSession!
-    private var displayLink: CADisplayLink?
     private(set) var state: TrackingState = .pausing
     private var positionLogs: [CGPoint] = []
     private var lastUsedPositonLogIndex: Int = 0
@@ -33,9 +32,6 @@ class EyeTracker: NSObject, ARSessionDelegate {
     }
 
     func start() {
-        displayLink = CADisplayLink(target: self, selector: #selector(sync(with:)))
-        displayLink?.add(to: .main, forMode: .common)
-
         session = ARSession()
         session.delegate = self
         let configuration = ARFaceTrackingConfiguration()
@@ -44,11 +40,10 @@ class EyeTracker: NSObject, ARSessionDelegate {
 
     func pause() {
         session.pause()
-        displayLink?.invalidate()
         state = .pausing
     }
 
-    @objc func sync(with display: CADisplayLink) {
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
         delegate?.eyeTracker(self, didUpdateTrackingState: state)
         state = .notTracked
     }
@@ -105,7 +100,7 @@ class EyeTracker: NSObject, ARSessionDelegate {
             case (viewport.width..., _):
                 state = .screenOut(.right)
             default:
-                fatalError("not come here")
+                fatalError("must not come here")
             }
         }
     }

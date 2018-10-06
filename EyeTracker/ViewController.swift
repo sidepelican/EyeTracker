@@ -28,6 +28,7 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         imageView.alpha = 0.3
+        imageView.contentMode = .scaleAspectFill
         imageView.isHidden = true
 
         let baseRect = UIScreen.main.bounds
@@ -62,8 +63,49 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         imageView.isHidden = !sender.isOn
     }
 
+    private var currentHighlightedCell: UITableViewCell? {
+        didSet {
+            oldValue?.isHighlighted = false
+            currentHighlightedCell?.isHighlighted = true
+        }
+    }
+    private func hitTestCells(screenPosition: CGPoint) {
+        if navigationController?.visibleViewController != self {
+            if CGRect(x: 0, y: 38, width: 85, height: 56).contains(screenPosition) {
+                pointView.progress += 0.03
+                if pointView.progress >= 1.0 {
+                    navigationController?.popViewController(animated: true)
+                    clearSelection()
+                }
+            } else {
+                clearSelection()
+            }
+            return
+        }
+
+        for cell in tableView.visibleCells {
+            if cell.hitTest(cell.convert(screenPosition, from: nil), with: nil) == nil { continue }
+
+            currentHighlightedCell = cell
+            pointView.progress += 0.015
+
+            if pointView.progress >= 1.0 {
+                performSegue(withIdentifier: "Segue", sender: currentHighlightedCell)
+                clearSelection()
+            }
+
+            return
+        }
+
+        clearSelection()
+    }
+
+    private func clearSelection() {
+        currentHighlightedCell = nil
+        pointView.progress = 0.0
+    }
+
     private func scrollTableView(_ y: CGFloat) {
-        tableView.flashScrollIndicators()
         var nextContentOffset = CGPoint(x: tableView.contentOffset.x, y: tableView.contentOffset.y + y)
         nextContentOffset.y = min(max(nextContentOffset.y, 0), tableView.contentSize.height - tableView.bounds.height)
         tableView.setContentOffset(nextContentOffset, animated: false)
@@ -77,10 +119,8 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         case .screenIn(let screenPos):
             pointView.isHidden = false
             pointView.center = screenPos
-            pointView.progress += 0.01
-            if pointView.progress > 1.0 { pointView.progress = 0.0 }
+            hitTestCells(screenPosition: screenPos)
         case .screenOut(let edge):
-            pointView.isHidden = true
             edgeViews[edge]?.isHidden = false
             switch edge {
             case .top:
@@ -90,26 +130,18 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
             default:
                 break
             }
+            pointView.isHidden = true
+            clearSelection()
         case .notTracked:
             pointView.isHidden = true
+            clearSelection()
         case .pausing:
             pointView.isHidden = true
+            clearSelection()
         }
 
         if !imageView.isHidden, let currentFrame = eyeTracker.currentFrame {
-            let ciImage = CIImage(cvImageBuffer: currentFrame.capturedImage).oriented(.right)
-            let context = CIContext()
-            let rect = CGRect(x: 0,
-                              y: 0,
-                              width: CVPixelBufferGetHeight(currentFrame.capturedImage),
-                              height: CVPixelBufferGetWidth(currentFrame.capturedImage))
-
-            let cgImage = context.createCGImage(ciImage, from: rect)
-
-            if let cgImage = cgImage {
-                imageView.image = UIImage(cgImage: cgImage)
-                imageView.contentMode = .scaleAspectFill
-            }
+            imageView.image = UIImage(cvImageBuffer: currentFrame.capturedImage, orientation: .right)
         }
     }
 
@@ -126,7 +158,21 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
     }
 }
 
-extension EyeTracker.ScreenEdge {
+private extension UIImage {
+    convenience init?(cvImageBuffer: CVImageBuffer, orientation: CGImagePropertyOrientation) {
+        let ciImage = CIImage(cvImageBuffer: cvImageBuffer).oriented(orientation)
+        let context = CIContext()
+        let rect = CGRect(x: 0,
+                          y: 0,
+                          width: CVPixelBufferGetHeight(cvImageBuffer),
+                          height: CVPixelBufferGetWidth(cvImageBuffer))
+
+        guard let cgImage = context.createCGImage(ciImage, from: rect) else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}
+
+private extension EyeTracker.ScreenEdge {
     var rectEdge: CGRectEdge {
         switch self {
         case .top:

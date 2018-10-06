@@ -26,4 +26,8 @@ class ContentCell: UITableViewCell {
         contentView.backgroundColor = .white
         innerView.backgroundColor = highlighted ? .lightGray : .white
     }
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return innerView.hitTest(point, with: event)
+    }
 }

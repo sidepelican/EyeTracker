@@ -10,6 +10,7 @@ import UIKit
 class CursorView: UIView {
     var progress: CGFloat = 0.0 {
         didSet {
+            progress = min(max(progress, 0.0), 1.0)
             setNeedsDisplay()
         }
     }

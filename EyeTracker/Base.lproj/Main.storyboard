@@ -55,7 +55,7 @@
                                         <connections>
                                             <outlet property="innerView" destination="wKS-oq-zco" id="ZOJ-eY-21f"/>
                                             <outlet property="titleLabel" destination="xXX-TH-Mym" id="i2J-vT-Kk1"/>
-                                            <segue destination="Psv-QB-TFW" kind="show" id="Mq0-Lu-zO3"/>
+                                            <segue destination="Psv-QB-TFW" kind="show" identifier="Segue" id="Mq0-Lu-zO3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
