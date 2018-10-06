@@ -48,7 +48,9 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         pointView.center = view.center
         pointView.layer.zPosition = 333
 
-        eyeTracker.start()
+        if EyeTracker.isSupported {
+            eyeTracker.start()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

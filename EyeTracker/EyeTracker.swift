@@ -19,12 +19,18 @@ class EyeTracker: NSObject, ARSessionDelegate {
     private var session: ARSession!
     private var displayLink: CADisplayLink?
     private(set) var state: TrackingState = .pausing
+    private var positionLogs: [CGPoint] = []
+    private var lastUsedPositonLogIndex: Int = 0
 
     var currentFrame: ARFrame? {
         return session.currentFrame
     }
     weak var delegate: EyeTrackerDelegate?
     var screenDisplacement: Float = 0.04
+
+    class var isSupported: Bool {
+        return ARFaceTrackingConfiguration.isSupported
+    }
 
     func start() {
         displayLink = CADisplayLink(target: self, selector: #selector(sync(with:)))
@@ -84,11 +90,12 @@ class EyeTracker: NSObject, ARSessionDelegate {
 
         let viewport = UIScreen.main.bounds.size
         let screenPos = camera.projectPoint(eyesMidPoint, orientation: .portrait, viewportSize: viewport)
+        let smoothPos = smoothingPosition(with: screenPos)
 
-        if UIScreen.main.bounds.contains(screenPos) {
-            state = .screenIn(screenPos)
+        if UIScreen.main.bounds.contains(smoothPos) {
+            state = .screenIn(smoothPos)
         } else {
-            switch (screenPos.x, screenPos.y) {
+            switch (smoothPos.x, smoothPos.y) {
             case (_, ...0):
                 state = .screenOut(.top)
             case (_, viewport.height...):
@@ -101,5 +108,26 @@ class EyeTracker: NSObject, ARSessionDelegate {
                 fatalError("not come here")
             }
         }
+    }
+
+    private func smoothingPosition(with newPosition: CGPoint) -> CGPoint {
+        let logLimit = 10
+        if positionLogs.count >= logLimit {
+            if lastUsedPositonLogIndex > logLimit - 1 {
+                lastUsedPositonLogIndex = 0
+            }
+            positionLogs[lastUsedPositonLogIndex] = newPosition
+            lastUsedPositonLogIndex += 1
+        } else {
+            positionLogs.append(newPosition)
+        }
+
+        let sum = positionLogs.reduce(into: CGPoint.zero) { sum, point in
+            sum.x += point.x
+            sum.y += point.y
+        }
+        let count = CGFloat(positionLogs.count)
+
+        return CGPoint(x: sum.x / count, y: sum.y / count)
     }
 }
