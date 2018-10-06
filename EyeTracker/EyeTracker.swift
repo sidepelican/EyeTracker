@@ -26,7 +26,7 @@ class EyeTracker: NSObject, ARSessionDelegate {
         return session.currentFrame
     }
     weak var delegate: EyeTrackerDelegate?
-    var screenDisplacement: Float = 0.04
+    var screenDisplacement: Float = 0.043
 
     class var isSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported

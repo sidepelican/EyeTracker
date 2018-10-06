@@ -21,15 +21,15 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Cell" rowHeight="180" id="2qM-vx-XoF" customClass="ContentCell" customModule="EyeTracker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="180" id="2qM-vx-XoF" customClass="ContentCell" customModule="EyeTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2qM-vx-XoF" id="qGy-vk-XCz">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKS-oq-zco">
-                                                    <rect key="frame" x="20" y="26" width="302" height="128"/>
+                                                    <rect key="frame" x="20" y="26" width="335" height="128"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXX-TH-Mym">
                                                             <rect key="frame" x="10" y="10" width="42" height="25.5"/>
@@ -68,7 +68,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="IlY-AT-Det" secondAttribute="trailing" id="Vho-Vq-a03"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="IlY-AT-Det" secondAttribute="bottom" id="Vo8-dj-OC7"/>
+                            <constraint firstAttribute="bottom" secondItem="IlY-AT-Det" secondAttribute="bottom" id="Vo8-dj-OC7"/>
                             <constraint firstItem="IlY-AT-Det" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="gHJ-ag-y5n"/>
                             <constraint firstItem="IlY-AT-Det" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="rID-nW-htv"/>
                         </constraints>

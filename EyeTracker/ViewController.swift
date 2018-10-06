@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    private let pointView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+    private let pointView = CursorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
     private let imageView = UIImageView()
     private let eyeTracker = EyeTracker()
     private var edgeViews: [EyeTracker.ScreenEdge: CAGradientLayer] = [:]
@@ -43,10 +43,7 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         }
 
         navigationController?.view.addSubview(pointView)
-        pointView.backgroundColor = .red
-        pointView.layer.cornerRadius = 5.0
         pointView.center = view.center
-        pointView.layer.zPosition = 333
 
         if EyeTracker.isSupported {
             eyeTracker.start()
@@ -80,6 +77,8 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
         case .screenIn(let screenPos):
             pointView.isHidden = false
             pointView.center = screenPos
+            pointView.progress += 0.01
+            if pointView.progress > 1.0 { pointView.progress = 0.0 }
         case .screenOut(let edge):
             pointView.isHidden = true
             edgeViews[edge]?.isHidden = false
