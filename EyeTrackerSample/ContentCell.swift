@@ -1,10 +1,3 @@
-//
-//  ContentCell.swift
-//  EyeTracker
-//
-//  Created by kenta on 2018/10/05.
-//
-
 import UIKit
 
 class ContentCell: UITableViewCell {

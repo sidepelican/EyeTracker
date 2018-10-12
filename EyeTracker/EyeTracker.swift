@@ -1,18 +1,18 @@
 import ARKit
 
-protocol EyeTrackerDelegate: class {
+public protocol EyeTrackerDelegate: class {
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState)
 }
 
-class EyeTracker: NSObject, ARSessionDelegate {
-    enum TrackingState {
+public class EyeTracker: NSObject, ARSessionDelegate {
+    public enum TrackingState {
         case screenIn(CGPoint)
         case screenOut(ScreenEdge)
         case notTracked
         case pausing
     }
 
-    enum ScreenEdge: CaseIterable {
+    public enum ScreenEdge: CaseIterable {
         case top, left, right, bottom
     }
 
@@ -21,34 +21,34 @@ class EyeTracker: NSObject, ARSessionDelegate {
     private var positionLogs: [CGPoint] = []
     private var lastUsedPositonLogIndex: Int = 0
 
-    var currentFrame: ARFrame? {
+    public var currentFrame: ARFrame? {
         return session.currentFrame
     }
-    weak var delegate: EyeTrackerDelegate?
-    var screenDisplacement: Float = 0.043
+    public weak var delegate: EyeTrackerDelegate?
+    public var screenDisplacement: Float = 0.043
 
-    class var isSupported: Bool {
+    public class var isSupported: Bool {
         return ARFaceTrackingConfiguration.isSupported
     }
 
-    func start() {
+    public func start() {
         session = ARSession()
         session.delegate = self
         let configuration = ARFaceTrackingConfiguration()
         session.run(configuration)
     }
 
-    func pause() {
+    public func pause() {
         session.pause()
         state = .pausing
     }
 
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+    public func session(_ session: ARSession, didUpdate frame: ARFrame) {
         delegate?.eyeTracker(self, didUpdateTrackingState: state)
         state = .notTracked
     }
 
-    func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+    public func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
         guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first,
             let camera = session.currentFrame?.camera else {
                 return

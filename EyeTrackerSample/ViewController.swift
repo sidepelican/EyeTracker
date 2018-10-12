@@ -1,10 +1,4 @@
-//
-//  ViewController.swift
-//  EyeTracker
-//
-//  Created by kenta-okamura on 2018/10/01.
-//
-
+import EyeTracker
 import UIKit
 
 class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate, UITableViewDataSource {

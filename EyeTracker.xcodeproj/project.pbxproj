@@ -7,101 +7,164 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		370175CA21650F0700F4C84F /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370175C921650F0700F4C84F /* Ray.swift */; };
-		370175CC21650F7400F4C84F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370175CB21650F7400F4C84F /* Plane.swift */; };
-		371E11092168943E00CCAB9D /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371E11082168943E00CCAB9D /* CursorView.swift */; };
-		377DEDE52167A765002E85A0 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377DEDE42167A765002E85A0 /* ContentCell.swift */; };
-		3799A8042166DE26008D80E1 /* EyeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A8032166DE26008D80E1 /* EyeTracker.swift */; };
-		3799A8062166DE96008D80E1 /* simd+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3799A8052166DE96008D80E1 /* simd+Extensions.swift */; };
-		83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1DC21621E5C005BFBED /* AppDelegate.swift */; };
-		83BCF1E121621E5C005BFBED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCF1E021621E5C005BFBED /* ViewController.swift */; };
-		83BCF1E421621E5C005BFBED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1E221621E5C005BFBED /* Main.storyboard */; };
-		83BCF1E621621E5E005BFBED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1E521621E5E005BFBED /* Assets.xcassets */; };
-		83BCF1E921621E5E005BFBED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83BCF1E721621E5E005BFBED /* LaunchScreen.storyboard */; };
+		379FA7A82170D8C7006F1A66 /* EyeTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 379FA7A62170D8C7006F1A66 /* EyeTracker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		379FA7B82170D913006F1A66 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379FA7B72170D913006F1A66 /* ARKit.framework */; };
+		379FA7C02170D94C006F1A66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7BF2170D94C006F1A66 /* AppDelegate.swift */; };
+		379FA7C72170D94D006F1A66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 379FA7C62170D94D006F1A66 /* Assets.xcassets */; };
+		379FA7CA2170D94D006F1A66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 379FA7C82170D94D006F1A66 /* LaunchScreen.storyboard */; };
+		379FA7D92170DB52006F1A66 /* EyeTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 379FA7A32170D8C7006F1A66 /* EyeTracker.framework */; };
+		379FA7DA2170DB52006F1A66 /* EyeTracker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 379FA7A32170D8C7006F1A66 /* EyeTracker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		379FA7E52170DDE3006F1A66 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7E12170DDE2006F1A66 /* Plane.swift */; };
+		379FA7E62170DDE3006F1A66 /* simd+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7E22170DDE3006F1A66 /* simd+Extensions.swift */; };
+		379FA7E72170DDE3006F1A66 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7E32170DDE3006F1A66 /* Ray.swift */; };
+		379FA7E82170DDE3006F1A66 /* EyeTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7E42170DDE3006F1A66 /* EyeTracker.swift */; };
+		379FA7EC2170DDF5006F1A66 /* CursorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7E92170DDF5006F1A66 /* CursorView.swift */; };
+		379FA7ED2170DDF5006F1A66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7EA2170DDF5006F1A66 /* ViewController.swift */; };
+		379FA7EE2170DDF5006F1A66 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7EB2170DDF5006F1A66 /* ContentCell.swift */; };
+		379FA7F12170DE07006F1A66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 379FA7EF2170DE07006F1A66 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		379FA7DB2170DB52006F1A66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 379FA79A2170D8C7006F1A66 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 379FA7A22170D8C7006F1A66;
+			remoteInfo = EyeTracker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		379FA7DD2170DB52006F1A66 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				379FA7DA2170DB52006F1A66 /* EyeTracker.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		370175C921650F0700F4C84F /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
-		370175CB21650F7400F4C84F /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
-		371E11082168943E00CCAB9D /* CursorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
-		377DEDE221679A2E002E85A0 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
-		377DEDE42167A765002E85A0 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
-		3799A8032166DE26008D80E1 /* EyeTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EyeTracker.swift; sourceTree = "<group>"; };
-		3799A8052166DE96008D80E1 /* simd+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+Extensions.swift"; sourceTree = "<group>"; };
-		83BCF1D921621E5C005BFBED /* EyeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		83BCF1DC21621E5C005BFBED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		83BCF1E021621E5C005BFBED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		83BCF1E321621E5C005BFBED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		83BCF1E521621E5E005BFBED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		83BCF1E821621E5E005BFBED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		83BCF1EA21621E5E005BFBED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		379FA7A32170D8C7006F1A66 /* EyeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EyeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		379FA7A62170D8C7006F1A66 /* EyeTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EyeTracker.h; sourceTree = "<group>"; };
+		379FA7A72170D8C7006F1A66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		379FA7B72170D913006F1A66 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		379FA7BD2170D94C006F1A66 /* EyeTrackerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeTrackerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		379FA7BF2170D94C006F1A66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		379FA7C62170D94D006F1A66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		379FA7C92170D94D006F1A66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		379FA7CB2170D94D006F1A66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		379FA7E12170DDE2006F1A66 /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
+		379FA7E22170DDE3006F1A66 /* simd+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd+Extensions.swift"; sourceTree = "<group>"; };
+		379FA7E32170DDE3006F1A66 /* Ray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
+		379FA7E42170DDE3006F1A66 /* EyeTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeTracker.swift; sourceTree = "<group>"; };
+		379FA7E92170DDF5006F1A66 /* CursorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CursorView.swift; sourceTree = "<group>"; };
+		379FA7EA2170DDF5006F1A66 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		379FA7EB2170DDF5006F1A66 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		379FA7F02170DE07006F1A66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		83BCF1D621621E5C005BFBED /* Frameworks */ = {
+		379FA7A02170D8C7006F1A66 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				379FA7B82170D913006F1A66 /* ARKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		379FA7BA2170D94C006F1A66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				379FA7D92170DB52006F1A66 /* EyeTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		377DEDE121679A2E002E85A0 /* Frameworks */ = {
+		379FA7992170D8C7006F1A66 = {
 			isa = PBXGroup;
 			children = (
-				377DEDE221679A2E002E85A0 /* ARKit.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		83BCF1D021621E5C005BFBED = {
-			isa = PBXGroup;
-			children = (
-				83BCF1DB21621E5C005BFBED /* EyeTracker */,
-				83BCF1DA21621E5C005BFBED /* Products */,
-				377DEDE121679A2E002E85A0 /* Frameworks */,
+				379FA7A52170D8C7006F1A66 /* EyeTracker */,
+				379FA7BE2170D94C006F1A66 /* EyeTrackerSample */,
+				379FA7A42170D8C7006F1A66 /* Products */,
+				379FA7B62170D913006F1A66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		83BCF1DA21621E5C005BFBED /* Products */ = {
+		379FA7A42170D8C7006F1A66 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				83BCF1D921621E5C005BFBED /* EyeTracker.app */,
+				379FA7A32170D8C7006F1A66 /* EyeTracker.framework */,
+				379FA7BD2170D94C006F1A66 /* EyeTrackerSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		83BCF1DB21621E5C005BFBED /* EyeTracker */ = {
+		379FA7A52170D8C7006F1A66 /* EyeTracker */ = {
 			isa = PBXGroup;
 			children = (
-				83BCF1DC21621E5C005BFBED /* AppDelegate.swift */,
-				83BCF1E021621E5C005BFBED /* ViewController.swift */,
-				377DEDE42167A765002E85A0 /* ContentCell.swift */,
-				371E11082168943E00CCAB9D /* CursorView.swift */,
-				370175C921650F0700F4C84F /* Ray.swift */,
-				3799A8032166DE26008D80E1 /* EyeTracker.swift */,
-				3799A8052166DE96008D80E1 /* simd+Extensions.swift */,
-				370175CB21650F7400F4C84F /* Plane.swift */,
-				83BCF1E221621E5C005BFBED /* Main.storyboard */,
-				83BCF1E521621E5E005BFBED /* Assets.xcassets */,
-				83BCF1E721621E5E005BFBED /* LaunchScreen.storyboard */,
-				83BCF1EA21621E5E005BFBED /* Info.plist */,
+				379FA7A62170D8C7006F1A66 /* EyeTracker.h */,
+				379FA7E42170DDE3006F1A66 /* EyeTracker.swift */,
+				379FA7E32170DDE3006F1A66 /* Ray.swift */,
+				379FA7E12170DDE2006F1A66 /* Plane.swift */,
+				379FA7E22170DDE3006F1A66 /* simd+Extensions.swift */,
+				379FA7A72170D8C7006F1A66 /* Info.plist */,
 			);
 			path = EyeTracker;
 			sourceTree = "<group>";
 		};
+		379FA7B62170D913006F1A66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				379FA7B72170D913006F1A66 /* ARKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		379FA7BE2170D94C006F1A66 /* EyeTrackerSample */ = {
+			isa = PBXGroup;
+			children = (
+				379FA7BF2170D94C006F1A66 /* AppDelegate.swift */,
+				379FA7EB2170DDF5006F1A66 /* ContentCell.swift */,
+				379FA7E92170DDF5006F1A66 /* CursorView.swift */,
+				379FA7EA2170DDF5006F1A66 /* ViewController.swift */,
+				379FA7C62170D94D006F1A66 /* Assets.xcassets */,
+				379FA7EF2170DE07006F1A66 /* Main.storyboard */,
+				379FA7C82170D94D006F1A66 /* LaunchScreen.storyboard */,
+				379FA7CB2170D94D006F1A66 /* Info.plist */,
+			);
+			path = EyeTrackerSample;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		379FA79E2170D8C7006F1A66 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				379FA7A82170D8C7006F1A66 /* EyeTracker.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		83BCF1D821621E5C005BFBED /* EyeTracker */ = {
+		379FA7A22170D8C7006F1A66 /* EyeTracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83BCF1ED21621E5E005BFBED /* Build configuration list for PBXNativeTarget "EyeTracker" */;
+			buildConfigurationList = 379FA7AB2170D8C7006F1A66 /* Build configuration list for PBXNativeTarget "EyeTracker" */;
 			buildPhases = (
-				83BCF1D521621E5C005BFBED /* Sources */,
-				83BCF1D621621E5C005BFBED /* Frameworks */,
-				83BCF1D721621E5C005BFBED /* Resources */,
+				379FA79E2170D8C7006F1A66 /* Headers */,
+				379FA79F2170D8C7006F1A66 /* Sources */,
+				379FA7A02170D8C7006F1A66 /* Frameworks */,
+				379FA7A12170D8C7006F1A66 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -109,24 +172,47 @@
 			);
 			name = EyeTracker;
 			productName = EyeTracker;
-			productReference = 83BCF1D921621E5C005BFBED /* EyeTracker.app */;
+			productReference = 379FA7A32170D8C7006F1A66 /* EyeTracker.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		379FA7BC2170D94C006F1A66 /* EyeTrackerSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 379FA7CC2170D94D006F1A66 /* Build configuration list for PBXNativeTarget "EyeTrackerSample" */;
+			buildPhases = (
+				379FA7B92170D94C006F1A66 /* Sources */,
+				379FA7BA2170D94C006F1A66 /* Frameworks */,
+				379FA7BB2170D94C006F1A66 /* Resources */,
+				379FA7DD2170DB52006F1A66 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				379FA7DC2170DB52006F1A66 /* PBXTargetDependency */,
+			);
+			name = EyeTrackerSample;
+			productName = EyeTrackerSample;
+			productReference = 379FA7BD2170D94C006F1A66 /* EyeTrackerSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		83BCF1D121621E5C005BFBED /* Project object */ = {
+		379FA79A2170D8C7006F1A66 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				TargetAttributes = {
-					83BCF1D821621E5C005BFBED = {
+					379FA7A22170D8C7006F1A66 = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+					};
+					379FA7BC2170D94C006F1A66 = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
 			};
-			buildConfigurationList = 83BCF1D421621E5C005BFBED /* Build configuration list for PBXProject "EyeTracker" */;
+			buildConfigurationList = 379FA79D2170D8C7006F1A66 /* Build configuration list for PBXProject "EyeTracker" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -134,68 +220,91 @@
 				en,
 				Base,
 			);
-			mainGroup = 83BCF1D021621E5C005BFBED;
-			productRefGroup = 83BCF1DA21621E5C005BFBED /* Products */;
+			mainGroup = 379FA7992170D8C7006F1A66;
+			productRefGroup = 379FA7A42170D8C7006F1A66 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				83BCF1D821621E5C005BFBED /* EyeTracker */,
+				379FA7A22170D8C7006F1A66 /* EyeTracker */,
+				379FA7BC2170D94C006F1A66 /* EyeTrackerSample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		83BCF1D721621E5C005BFBED /* Resources */ = {
+		379FA7A12170D8C7006F1A66 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83BCF1E921621E5E005BFBED /* LaunchScreen.storyboard in Resources */,
-				83BCF1E621621E5E005BFBED /* Assets.xcassets in Resources */,
-				83BCF1E421621E5C005BFBED /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		379FA7BB2170D94C006F1A66 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				379FA7F12170DE07006F1A66 /* Main.storyboard in Resources */,
+				379FA7CA2170D94D006F1A66 /* LaunchScreen.storyboard in Resources */,
+				379FA7C72170D94D006F1A66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		83BCF1D521621E5C005BFBED /* Sources */ = {
+		379FA79F2170D8C7006F1A66 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3799A8042166DE26008D80E1 /* EyeTracker.swift in Sources */,
-				377DEDE52167A765002E85A0 /* ContentCell.swift in Sources */,
-				83BCF1E121621E5C005BFBED /* ViewController.swift in Sources */,
-				3799A8062166DE96008D80E1 /* simd+Extensions.swift in Sources */,
-				371E11092168943E00CCAB9D /* CursorView.swift in Sources */,
-				83BCF1DD21621E5C005BFBED /* AppDelegate.swift in Sources */,
-				370175CC21650F7400F4C84F /* Plane.swift in Sources */,
-				370175CA21650F0700F4C84F /* Ray.swift in Sources */,
+				379FA7E82170DDE3006F1A66 /* EyeTracker.swift in Sources */,
+				379FA7E62170DDE3006F1A66 /* simd+Extensions.swift in Sources */,
+				379FA7E72170DDE3006F1A66 /* Ray.swift in Sources */,
+				379FA7E52170DDE3006F1A66 /* Plane.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		379FA7B92170D94C006F1A66 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				379FA7ED2170DDF5006F1A66 /* ViewController.swift in Sources */,
+				379FA7EE2170DDF5006F1A66 /* ContentCell.swift in Sources */,
+				379FA7EC2170DDF5006F1A66 /* CursorView.swift in Sources */,
+				379FA7C02170D94C006F1A66 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		83BCF1E221621E5C005BFBED /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				83BCF1E321621E5C005BFBED /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		379FA7DC2170DB52006F1A66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 379FA7A22170D8C7006F1A66 /* EyeTracker */;
+			targetProxy = 379FA7DB2170DB52006F1A66 /* PBXContainerItemProxy */;
 		};
-		83BCF1E721621E5E005BFBED /* LaunchScreen.storyboard */ = {
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		379FA7C82170D94D006F1A66 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				83BCF1E821621E5E005BFBED /* Base */,
+				379FA7C92170D94D006F1A66 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		379FA7EF2170DE07006F1A66 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				379FA7F02170DE07006F1A66 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		83BCF1EB21621E5E005BFBED /* Debug */ = {
+		379FA7A92170D8C7006F1A66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -229,6 +338,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -253,10 +363,12 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		83BCF1EC21621E5E005BFBED /* Release */ = {
+		379FA7AA2170D8C7006F1A66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -290,6 +402,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -308,40 +421,96 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		83BCF1EE21621E5E005BFBED /* Debug */ = {
+		379FA7AC2170D8C7006F1A66 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = R3M694BK62;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = EyeTracker/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.side.junktown.EyeTracker;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		379FA7AD2170D8C7006F1A66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = R3M694BK62;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = EyeTracker/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.side.junktown.EyeTracker;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		379FA7CD2170D94D006F1A66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = R3M694BK62;
-				INFOPLIST_FILE = EyeTracker/Info.plist;
+				INFOPLIST_FILE = EyeTrackerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.side.junktown.EyeTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.side.junktown.EyeTrackerSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		83BCF1EF21621E5E005BFBED /* Release */ = {
+		379FA7CE2170D94D006F1A66 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R3M694BK62;
-				INFOPLIST_FILE = EyeTracker/Info.plist;
+				INFOPLIST_FILE = EyeTrackerSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.side.junktown.EyeTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.side.junktown.EyeTrackerSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -351,25 +520,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		83BCF1D421621E5C005BFBED /* Build configuration list for PBXProject "EyeTracker" */ = {
+		379FA79D2170D8C7006F1A66 /* Build configuration list for PBXProject "EyeTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83BCF1EB21621E5E005BFBED /* Debug */,
-				83BCF1EC21621E5E005BFBED /* Release */,
+				379FA7A92170D8C7006F1A66 /* Debug */,
+				379FA7AA2170D8C7006F1A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83BCF1ED21621E5E005BFBED /* Build configuration list for PBXNativeTarget "EyeTracker" */ = {
+		379FA7AB2170D8C7006F1A66 /* Build configuration list for PBXNativeTarget "EyeTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83BCF1EE21621E5E005BFBED /* Debug */,
-				83BCF1EF21621E5E005BFBED /* Release */,
+				379FA7AC2170D8C7006F1A66 /* Debug */,
+				379FA7AD2170D8C7006F1A66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		379FA7CC2170D94D006F1A66 /* Build configuration list for PBXNativeTarget "EyeTrackerSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				379FA7CD2170D94D006F1A66 /* Debug */,
+				379FA7CE2170D94D006F1A66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 83BCF1D121621E5C005BFBED /* Project object */;
+	rootObject = 379FA79A2170D8C7006F1A66 /* Project object */;
 }

@@ -1,10 +1,3 @@
-//
-//  CursorView.swift
-//  EyeTracker
-//
-//  Created by kenta on 2018/10/06.
-//
-
 import UIKit
 
 class CursorView: UIView {
@@ -50,7 +43,5 @@ class CursorView: UIView {
         context.setLineWidth(bounds.width * 0.13)
         context.setStrokeColor(color)
         context.strokePath()
-
     }
-
 }
