@@ -1,11 +1,9 @@
 import ARKit
 
-@available(iOS 11.0, *)
 public protocol EyeTrackerDelegate: class {
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState)
 }
 
-@available(iOS 11.0, *)
 public class EyeTracker: NSObject, ARSessionDelegate {
     public enum TrackingState {
         case screenIn(CGPoint)

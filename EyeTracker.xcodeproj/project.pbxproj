@@ -22,6 +22,7 @@
 		379FA7ED2170DDF5006F1A66 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7EA2170DDF5006F1A66 /* ViewController.swift */; };
 		379FA7EE2170DDF5006F1A66 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379FA7EB2170DDF5006F1A66 /* ContentCell.swift */; };
 		379FA7F12170DE07006F1A66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 379FA7EF2170DE07006F1A66 /* Main.storyboard */; };
+		37D99012217774240061F274 /* EyeTrackerObjCWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D99011217774240061F274 /* EyeTrackerObjCWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		379FA7EA2170DDF5006F1A66 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		379FA7EB2170DDF5006F1A66 /* ContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		379FA7F02170DE07006F1A66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		37D99011217774240061F274 /* EyeTrackerObjCWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeTrackerObjCWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 			children = (
 				379FA7A62170D8C7006F1A66 /* EyeTracker.h */,
 				379FA7E42170DDE3006F1A66 /* EyeTracker.swift */,
+				37D99011217774240061F274 /* EyeTrackerObjCWrapper.swift */,
 				379FA7E32170DDE3006F1A66 /* Ray.swift */,
 				379FA7E12170DDE2006F1A66 /* Plane.swift */,
 				379FA7E22170DDE3006F1A66 /* simd+Extensions.swift */,
@@ -260,6 +263,7 @@
 				379FA7E62170DDE3006F1A66 /* simd+Extensions.swift in Sources */,
 				379FA7E72170DDE3006F1A66 /* Ray.swift in Sources */,
 				379FA7E52170DDE3006F1A66 /* Plane.swift in Sources */,
+				37D99012217774240061F274 /* EyeTrackerObjCWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
