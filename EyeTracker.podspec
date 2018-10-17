@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "EyeTracker"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "Track gazing position with ARKit"
   s.homepage     = "https://github.com/sidepelican/EyeTracker"
   s.license      = "MIT"

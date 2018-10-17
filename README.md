@@ -27,9 +27,9 @@ override func viewWillAppear(_ animated: Bool) {
 
 func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState) {
     switch state {
-    case .screenIn(let screenPos):
+    case let .screenIn(screenPos):
         // ...
-    case .screenOut(let edge):
+    case let .screenOut(edge, screenPos):
         // ...
     case .notTracked:
         // ...
@@ -45,7 +45,7 @@ func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTrack
 You can use [CocoaPods](http://cocoapods.org/) to install `EyeTracker` by adding it to your `Podfile`:
 
 ```ruby
-platform :ios, '12.0'
+platform :ios, '11.0'
 use_frameworks!
 pod 'EyeTracker'
 ```
