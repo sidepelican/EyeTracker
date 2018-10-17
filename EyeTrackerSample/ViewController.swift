@@ -122,11 +122,11 @@ class ViewController: UIViewController, EyeTrackerDelegate, UITableViewDelegate,
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState) {
         edgeViews.forEach { $1.isHidden = true }
         switch state {
-        case .screenIn(let screenPos):
+        case let .screenIn(screenPos):
             pointView.isHidden = false
             pointView.center = screenPos
             hitTestCells(screenPosition: screenPos)
-        case .screenOut(let edge):
+        case let .screenOut(edge, _):
             edgeViews[edge]?.isHidden = false
             switch edge {
             case .top:

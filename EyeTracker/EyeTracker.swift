@@ -9,7 +9,7 @@ public protocol EyeTrackerDelegate: class {
 public class EyeTracker: NSObject, ARSessionDelegate {
     public enum TrackingState {
         case screenIn(CGPoint)
-        case screenOut(ScreenEdge)
+        case screenOut(ScreenEdge, CGPoint)
         case notTracked
         case pausing
     }
@@ -97,13 +97,13 @@ public class EyeTracker: NSObject, ARSessionDelegate {
         } else {
             switch (smoothPos.x, smoothPos.y) {
             case (_, ...0):
-                state = .screenOut(.top)
+                state = .screenOut(.top, smoothPos)
             case (_, viewport.height...):
-                state = .screenOut(.bottom)
+                state = .screenOut(.bottom, smoothPos)
             case (...0, _):
-                state = .screenOut(.left)
+                state = .screenOut(.left, smoothPos)
             case (viewport.width..., _):
-                state = .screenOut(.right)
+                state = .screenOut(.right, smoothPos)
             default:
                 fatalError("must not come here")
             }
