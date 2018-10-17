@@ -1,9 +1,11 @@
 import ARKit
 
+@available(iOS 11.0, *)
 public protocol EyeTrackerDelegate: class {
     func eyeTracker(_ eyeTracker: EyeTracker, didUpdateTrackingState state: EyeTracker.TrackingState)
 }
 
+@available(iOS 11.0, *)
 public class EyeTracker: NSObject, ARSessionDelegate {
     public enum TrackingState {
         case screenIn(CGPoint)
@@ -28,6 +30,7 @@ public class EyeTracker: NSObject, ARSessionDelegate {
     public var screenDisplacement: Float = 0.043
 
     public class var isSupported: Bool {
+        guard #available(iOS 12.0, *) else { return false }
         return ARFaceTrackingConfiguration.isSupported
     }
 
@@ -49,6 +52,8 @@ public class EyeTracker: NSObject, ARSessionDelegate {
     }
 
     public func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        guard #available(iOS 12.0, *) else { return }
+
         guard let faceAnchor = anchors.compactMap({ $0 as? ARFaceAnchor }).first,
             let camera = session.currentFrame?.camera else {
                 return
